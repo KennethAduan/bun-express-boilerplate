@@ -11,6 +11,12 @@ const envSchema = z.object({
   DATABASE_URL: z.string(),
   JWT_SECRET: z.string(),
   JWT_EXPIRES_IN: z.string().default("7d"),
+  SMTP_HOST: z.string(),
+  SMTP_PORT: z.coerce.number().default(587),
+  SMTP_USER: z.string(),
+  SMTP_PASS: z.string(),
+  APP_NAME: z.string().default("Express API"),
+  CLIENT_URL: z.string().default("http://localhost:3000"),
 });
 
 const env = envSchema.safeParse(process.env);

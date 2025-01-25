@@ -3,6 +3,7 @@ import { User } from "@prisma/client";
 import { AppError } from "../middlewares/errorHandler";
 import { hash } from "../utils/password";
 import prisma from "@/config/database";
+import { EmailService } from "./email.service";
 
 interface CreateUserInput {
   email: string;
@@ -19,12 +20,17 @@ export class UserService {
 
     const hashedPassword = await hash(data.password);
 
-    return await prisma.user.create({
+    const user = await prisma.user.create({
       data: {
         ...data,
         password: hashedPassword,
       },
     });
+
+    // Send welcome email
+    await EmailService.sendWelcomeEmail(user.email, user.name ?? undefined);
+
+    return user;
   }
 
   static async findByEmail(email: string): Promise<User | null> {
