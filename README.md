@@ -34,12 +34,14 @@ A modern, production-ready API template built with Bun, Express, Prisma, and Typ
   - Environment configuration
   - Database migrations
   - API documentation
+  - Vercel deployment ready
 
-## �� Prerequisites
+## Prerequisites
 
 - [Bun](https://bun.sh/) (latest version)
 - [PostgreSQL](https://www.postgresql.org/) (14 or higher)
 - [Node.js](https://nodejs.org/) (18 or higher)
+- [Vercel CLI](https://vercel.com/cli) (optional, for deployment)
 
 ## 🛠 Installation
 
@@ -201,6 +203,48 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For support, email kenneth.aduan10@gmail.com or open an issue in the repository.
 
+## 🚀 Deployment
+
+### Vercel Deployment
+
+1. Create a `vercel.json` configuration:
+
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.ts"
+    }
+  ]
+}
+```
+
+2. Deploy using Vercel CLI:
+
+```bash
+# Login to Vercel
+vercel login
+
+# Deploy to Vercel
+vercel
+
+# Deploy to production
+vercel --prod
+```
+
+3. Set up environment variables in Vercel:
+   - Go to your project settings in Vercel
+   - Add all required environment variables from `.env`
+   - Redeploy your application
+
 ## 🔮 Roadmap
 
 - [ ] Add GraphQL support
@@ -208,3 +252,4 @@ For support, email kenneth.aduan10@gmail.com or open an issue in the repository.
 - [ ] Add file upload functionality
 - [ ] Add caching layer
 - [ ] Add Docker support
+- [x] Add Vercel deployment support
