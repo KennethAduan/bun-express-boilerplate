@@ -32,6 +32,11 @@ export const createApp = () => {
   // Routes
   app.use("/api/v1", apiRouter);
 
+  app.get("/", (req, res) => {
+    res.status(200).json({
+      message: "Hello World",
+    });
+  });
   // Error handling
   app.use(errorHandler);
 

@@ -205,7 +205,7 @@ For support, email kenneth.aduan10@gmail.com or open an issue in the repository.
 
 ## 🚀 Deployment
 
-### Vercel Deployment
+### Vercel Deployment (API Link : [text](https://bun-express-boilerplate.vercel.app/))
 
 1. Create a `vercel.json` configuration:
 
@@ -214,14 +214,18 @@ For support, email kenneth.aduan10@gmail.com or open an issue in the repository.
   "version": 2,
   "builds": [
     {
-      "src": "src/index.ts",
+      "src": "dist/index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "src/index.ts"
+      "dest": "dist/index.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      }
     }
   ]
 }

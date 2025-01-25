@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch src/index.ts",
-    "start": "bun src/index.ts",
-    "build": "bun build src/index.ts --outdir ./dist",
+    "start": "bun dist/index.js",
+    "build": "bun build src/index.ts --outdir ./dist --target node",
+    "vercel-build": "prisma generate",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
@@ -16,7 +17,8 @@
     "format:check": "prettier --check \"src/**/*.ts\"",
     "test": "bun test",
     "test:watch": "bun test --watch",
-    "test:coverage": "bun test --coverage"
+    "test:coverage": "bun test --coverage",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.10.2",
