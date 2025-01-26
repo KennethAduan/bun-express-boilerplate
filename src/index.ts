@@ -27,7 +27,10 @@ export const createApp = () => {
   app.use(limiter);
 
   // Swagger Documentation
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.use("/api-docs", [
+    ...swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec),
+  ] as unknown as express.RequestHandler[]);
 
   // Routes
   app.use("/api/v1", apiRouter);
@@ -38,7 +41,7 @@ export const createApp = () => {
     });
   });
   // Error handling
-  app.use(errorHandler);
+  app.use(errorHandler as unknown as express.ErrorRequestHandler);
 
   return app;
 };
